@@ -34,6 +34,7 @@ public class App {
     public static double calculoDaBase(double contribuicao, double rendimentos){
         double calculoBase = rendimentos - contribuicao;
         calculoBase = 0.95*calculoBase;
+        return calculoBase;
     }
 
 
