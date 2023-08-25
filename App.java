@@ -1,11 +1,14 @@
-public class App{
-    public static void main(String args[]){
-        Scanner in = new Scanner (System.in);
+<<<<<<< HEAD
+public class App {
+    private static Scanner in = new Scanner (System.in);
+
+    public static void main(String args[]) {
 
         System.out.println("Deseja fazer:\n1-Declaração completa\n2-Declaração simplificada");
-        int opcao  in.nextInt();
-        switch (opcao){
-            case 1: System.out.println("Informe seu nome: ");
+        int opcao in.nextInt();
+        switch (opcao) {
+            case 1:
+                System.out.println("Informe seu nome: ");
                 String nome = in.nextLine();
                 System.out.println("Informe seu CPF: ");
                 int cpf = in.nextInt();
@@ -17,7 +20,8 @@ public class App{
                 int contribuicao = in.nextInt();
                 System.out.println("Informe seu total de rendimentos");
                 int rendimentos = in.nextInt();
-            case 2: String nome = in.nextLine();
+            case 2:
+                String nome = in.nextLine();
                 System.out.println("Informe seu CPF: ");
                 int cpf = in.nextInt();
                 System.out.println("Informe sua contribuição previdenciária oficial: ");
@@ -25,8 +29,6 @@ public class App{
                 System.out.println("Informe seu total de rendimentos");
                 int rendimentos = in.nextInt();
         }
-
     }
-
 
 }
