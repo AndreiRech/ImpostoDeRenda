@@ -1,3 +1,4 @@
+import java.util.Scanner;
 public class App {
     private static Scanner in = new Scanner (System.in);
     public static void main(String args[]) {
@@ -15,7 +16,6 @@ public class App {
                 2. Realizar declaração completa;
                 3. Verificar o imposto a pagar;
                 4. Sair.
-
                 """;
         System.out.println(mensagem);
     }
@@ -45,52 +45,64 @@ public class App {
                     break;
             }
         }
-        while (opc != 3);
+        while (opc != 4);
     }
 
     public static void decCompleta () {
-        String nome;
-        int cpf, idade, dependentes;
+        String nome, cpf;
+        int idade, dependentes;
         double contribuicao, rendimentos;
 
-        System.out.println("Informe seu nome: ");
-        nome = in.nextLine();
+        System.out.println("------------------- [ DECLARAÇÃO COMPLETA ] -------------------");
 
-        System.out.println("Informe seu CPF: ");
-        cpf = in.nextInt();
+        System.out.print("Informe seu nome: ");
+        nome = in.next();
 
-        System.out.println("Informe sua idade: ");
+        System.out.print("Informe seu CPF: ");
+        cpf = in.next();
+
+        System.out.print("Informe sua idade: ");
         idade = in.nextInt();
 
-        System.out.println("Informe o número de dependentes: ");
+        System.out.print("Informe o número de dependentes: ");
         dependentes = in.nextInt();
 
-        System.out.println("Informe sua contribuição previdenciária oficial: ");
+        System.out.print("Informe sua contribuição previdenciária oficial: ");
         contribuicao = in.nextDouble();
 
-        System.out.println("Informe seu total de rendimentos");
+        System.out.print("Informe seu total de rendimentos: ");
         rendimentos = in.nextDouble();
 
         calculoDaBase(contribuicao, rendimentos);
     }
 
     public static void decSimplificada () {
-        String nome;
-        int cpf;
+        String nome, cpf;
         double contribuicao, rendimentos;
 
-        System.out.println("Informe seu nome: ");
-        nome = in.nextLine();
+        System.out.println("------------------- [ DECLARAÇÃO SIMPLIFICADA ] -------------------");
+        System.out.print("Informe seu nome: ");
+        nome = in.next();
 
-        System.out.println("Informe seu CPF: ");
-        cpf = in.nextInt();
+        System.out.print("Informe seu CPF: ");
+        cpf = in.next();
 
-        System.out.println("Informe sua contribuição previdenciária oficial: ");
+        System.out.print("Informe sua contribuição previdenciária oficial: ");
         contribuicao = in.nextDouble();
 
-        System.out.println("Informe seu total de rendimentos");
+        System.out.print("Informe seu total de rendimentos");
         rendimentos = in.nextDouble();
 
         calculoDaBase(contribuicao, rendimentos);
+    }
+
+    public static double calculoDaBase(double contribuicao, double rendimentos){
+        double calculoBase = rendimentos - contribuicao;
+        calculoBase = 0.95*calculoBase;
+        return calculoBase;
+    }
+
+    public static void recebeImposto () {
+
     }
 }
