@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 public class App {
     private static Scanner in = new Scanner (System.in);
 
@@ -25,9 +25,9 @@ public class App {
                 System.out.println("Informe seu CPF: ");
                 int cpf = in.nextInt();
                 System.out.println("Informe sua contribuição previdenciária oficial: ");
-                int contribuicao = in.nextInt();
+                double contribuicao = in.nextDouble();
                 System.out.println("Informe seu total de rendimentos");
-                int rendimentos = in.nextInt();
+                double rendimentos = in.nextDouble();
         }
     }
 
