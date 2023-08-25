@@ -17,9 +17,9 @@ public class App {
                 System.out.println("Informe o número de dependentes: ");
                 int dependentes = in.nextInt();
                 System.out.println("Informe sua contribuição previdenciária oficial: ");
-                int contribuicao = in.nextInt();
+                double contribuicao = in.nextDouble();
                 System.out.println("Informe seu total de rendimentos");
-                int rendimentos = in.nextInt();
+                double rendimentos = in.nextDouble();
             case 2:
                 String nome = in.nextLine();
                 System.out.println("Informe seu CPF: ");
@@ -30,5 +30,11 @@ public class App {
                 int rendimentos = in.nextInt();
         }
     }
+
+    public static double calculoDaBase(double contribuicao, double rendimentos){
+        double calculoBase = rendimentos - contribuicao;
+        calculoBase = 0.95*calculoBase;
+    }
+
 
 }
