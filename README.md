@@ -1,4 +1,4 @@
-# appBares
+# Imposto de Renda
 Aplicativo que simula um gerenciador de imposto de renda.
 
 Um sistema é usado para o cadastramento de contribuintes (pessoas físicas) e cálculo do imposto de renda. O cálculo pode ser feito
