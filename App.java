@@ -1,13 +1,17 @@
 import java.util.Scanner;
+
 public class App {
-    private static Scanner in = new Scanner (System.in);
+    private static Scanner in = new Scanner(System.in);
+    private static String nome, cpf;
+    private static double contribuicao, rendimentos;
+    private static int idade, dependentes;
+
     public static void main(String args[]) {
         opcao();
     }
 
-    public static void menu () {
+    public static void menu() {
         String mensagem = """
-
                 ------------------- [ MENU ] -------------------
 
                 Informe o que deseja fazer:
@@ -20,7 +24,7 @@ public class App {
         System.out.println(mensagem);
     }
 
-    public static void opcao () {
+    public static void opcao() {
         int opc = 0;
 
         do {
@@ -35,7 +39,7 @@ public class App {
                     decCompleta();
                     break;
                 case 3:
-                    recebeImposto();
+                    calculoDaBase();
                     break;
                 case 4:
                     System.out.println("\nSaindo do aplicativo...");
@@ -44,15 +48,10 @@ public class App {
                     System.out.println("\nInforme uma opção válida!");
                     break;
             }
-        }
-        while (opc != 4);
+        } while (opc != 4);
     }
 
-    public static void decCompleta () {
-        String nome, cpf;
-        int idade, dependentes;
-        double contribuicao, rendimentos;
-
+    public static void decCompleta() {
         System.out.println("------------------- [ DECLARAÇÃO COMPLETA ] -------------------");
 
         System.out.print("Informe seu nome: ");
@@ -61,26 +60,22 @@ public class App {
         System.out.print("Informe seu CPF: ");
         cpf = in.next();
 
-        System.out.print("Informe sua idade: ");
-        idade = in.nextInt();
-
-        System.out.print("Informe o número de dependentes: ");
-        dependentes = in.nextInt();
-
         System.out.print("Informe sua contribuição previdenciária oficial: ");
         contribuicao = in.nextDouble();
 
         System.out.print("Informe seu total de rendimentos: ");
         rendimentos = in.nextDouble();
 
-        calculoDaBase(contribuicao, rendimentos);
+        System.out.print("Informe o número de dependentes: ");
+        dependentes = in.nextInt();
+
+        System.out.print("Informe a idade: ");
+        idade = in.nextInt();
     }
 
-    public static void decSimplificada () {
-        String nome, cpf;
-        double contribuicao, rendimentos;
-
+    public static void decSimplificada() {
         System.out.println("------------------- [ DECLARAÇÃO SIMPLIFICADA ] -------------------");
+
         System.out.print("Informe seu nome: ");
         nome = in.next();
 
@@ -90,19 +85,54 @@ public class App {
         System.out.print("Informe sua contribuição previdenciária oficial: ");
         contribuicao = in.nextDouble();
 
-        System.out.print("Informe seu total de rendimentos");
+        System.out.print("Informe seu total de rendimentos: ");
         rendimentos = in.nextDouble();
-
-        calculoDaBase(contribuicao, rendimentos);
     }
 
-    public static double calculoDaBase(double contribuicao, double rendimentos){
+    public static void calculoDaBase() {
         double calculoBase = rendimentos - contribuicao;
-        calculoBase = 0.95*calculoBase;
-        return calculoBase;
+        calculoBase = 0.95 * calculoBase;
+
+        double imposto = pagaImposto(calculoBase);
+        double desconto = aplicarDesconto();
+        imposto -= desconto;
+
+        System.out.println("\nO imposto a pagar é R$" + imposto);
     }
 
-    public static void recebeImposto () {
+    public static double pagaImposto(double calculoBase) {
+        double base = calculoBase;
+        double imposto = 0;
+        if (base <= 12000) {
+            imposto = 0;
+        } else if (base <= 24000) {
+            imposto = (base - 12000) * 0.15;
+        } else {
+            imposto = (base - 24000) * 0.27 + (12000 * 0.15);
+        }
 
+        return imposto;
+    }
+
+    public static double aplicarDesconto() {
+        double desconto = 0;
+        if (idade < 65) {
+            if (dependentes <= 2) {
+                desconto = 0.02;
+            } else if (dependentes >= 3 && dependentes <= 5) {
+                desconto = 0.035;
+            } else if (dependentes > 5) {
+                desconto = 0.05;
+            }
+        } else {
+            if (dependentes <= 2) {
+                desconto = 0.03;
+            } else if (dependentes >= 3 && dependentes <= 5) {
+                desconto = 0.045;
+            } else if (dependentes > 5) {
+                desconto = 0.06;
+            }
+        }
+        return desconto * rendimentos;
     }
 }
